@@ -33,14 +33,15 @@ function resetAnimation(column) {
   }, 10);
 }
 
-let isStarted = false
+let isStarted = false;
 
 function start() {
-  if (isStarted) return
-  else isStarted = true
+  if (isStarted) return; // Блокируем повторный запуск
+  isStarted = true; // Устанавливаем флаг, что игра началась
 
   if (money < 10) {
     alert("Недостаточно средств чтобы играть!");
+    isStarted = false; // Разблокируем для новой попытки
     return;
   }
 
@@ -69,22 +70,24 @@ function start() {
   setTimeout(() => {
     if (results[0] === results[1] && results[1] === results[2]) {
       setTimeout(() => {
-        money += 10000; // Добавляем деньги после 2 секунд
+        money += 10000; // Добавляем деньги после 900 мс
         alert("🎉 Джекпот! Вы выигрываете 10 000 монет!");
         updateMoneyDisplay(); // Обновляем отображение денег
-      }, 900); // Ждём 2 секунды
+        isStarted = false; // Разблокируем для новой игры
+      }, 900); // Ждём 900 мс
     } else {
       updateMoneyDisplay();
+      isStarted = false; // Разблокируем, если джекпота нет
     }
     console.log(results);
   }, 4100); // Таймер для завершения основной анимации
-  isStarted = false
+}
 
   // Highlight the selected numbers
 
   // columns.forEach((column, i) => {
   //   elms(`.${column} > li`)[index].style.background = 'red';
   // });
-}
+
 
 window.onload = initialize;
