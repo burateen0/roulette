@@ -5,7 +5,7 @@ function calcColumn(column) {
   const columnElement = document.querySelector(`.${column}`);
   columnElement.innerHTML = '';
   for (let i = 0; i < 25; i++) {
-    const random = Math.floor(Math.random() * 2);
+    const random = Math.floor(Math.random() * 10);
     const cellColor = (i % 2) ? 'middle' : '';
     columnElement.innerHTML += `
       <li class="${cellColor}">${random}</li>
