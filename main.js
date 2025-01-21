@@ -33,7 +33,12 @@ function resetAnimation(column) {
   }, 10);
 }
 
+let isStarted = false
+
 function start() {
+  if (isStarted) return
+  else isStarted = true
+
   if (money < 10) {
     alert("Недостаточно средств чтобы играть!");
     return;
