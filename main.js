@@ -78,7 +78,7 @@ function start() {
     }
     console.log(results);
   }, 4100); // Таймер для завершения основной анимации
-  
+  isStarted = false
 
   // Highlight the selected numbers
 
