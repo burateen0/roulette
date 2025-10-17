@@ -25,9 +25,10 @@ function resetAnimation(column) {
   ulElement.style.transition = 'none';
   ulElement.style.left = '0';
   setTimeout(() => {
-    ulElement.style.transition = `0.7s ease`;  
+    ulElement.style.transition = `0.7s ease`;
   }, 10);
 }
+
 
 function start() {
   if (money < 10) {
@@ -39,9 +40,6 @@ function start() {
   updateMoneyDisplay();
 
   const columns = ['col1', 'col2', 'col3'];
-  const isJackpot = Math.random() < 0.11;
-  const jackpotNumber = Math.floor(Math.random() * 10);
-
   columns.forEach((column) => {
     calcColumn(column);
     resetAnimation(column);
@@ -59,13 +57,6 @@ function start() {
 
   setTimeout(() => {
     const index = -Math.floor((move + (elm('.scopeHidden').offsetWidth / 2) / -150) / 150) + 1;
-
-    if (isJackpot) {
-      columns.forEach((column) => {
-        elms(`.${column} > li`)[index].textContent = jackpotNumber;
-      });
-    }
-
     const results = columns.map((column) => parseInt(elms(`.${column} > li`)[index].textContent));
 
     if (results[0] === results[1] && results[1] === results[2]) {
@@ -75,7 +66,8 @@ function start() {
 
     updateMoneyDisplay();
     console.log(results);
-  }, 700); 
+  }, 700);
 }
+
 
 window.onload = initialize;
