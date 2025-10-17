@@ -70,20 +70,19 @@ function start() {
   setTimeout(() => {
     if (results[0] === results[1] && results[1] === results[2]) {
       setTimeout(() => {
-        money += 10000; // Добавляем деньги после 900 мс
+        money += 10000; 
         alert("🎉 Джекпот! Вы выигрываете 10 000 монет!");
-        updateMoneyDisplay(); // Обновляем отображение денег
-        isStarted = false; // Разблокируем для новой игры
-      }, 900); // Ждём 900 мс
+        updateMoneyDisplay(); 
+        isStarted = false; 
+      }, 900);
     } else {
       updateMoneyDisplay();
-      isStarted = false; // Разблокируем, если джекпота нет
+      isStarted = false; // если джекпота нет
     }
     console.log(results);
-  }, 4100); // Таймер для завершения основной анимации
+  }, 1000); // Таймер для завершения основной анимации
 }
 
-  // Highlight the selected numbers
 
   // columns.forEach((column, i) => {
   //   elms(`.${column} > li`)[index].style.background = 'red';
