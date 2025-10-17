@@ -1,10 +1,10 @@
-let money = 100;
+let money = 1000;
 
 function calcColumn(column) {
   const columnElement = document.querySelector(`.${column}`);
   columnElement.innerHTML = '';
   for (let i = 0; i < 25; i++) {
-    const random = Math.floor(Math.random() * 10);
+    const random = Math.floor(Math.random() * 7) + 1;
     const cellColor = (i % 2) ? 'middle' : '';
     columnElement.innerHTML += `<li class="${cellColor}">${random}</li>`;
   }
@@ -60,8 +60,8 @@ function start() {
     const results = columns.map((column) => parseInt(elms(`.${column} > li`)[index].textContent));
 
     if (results[0] === results[1] && results[1] === results[2]) {
-      money += 10000;
-      alert("🎉 Джекпот! Вы выигрываете 10 000 монет!");
+      money += 777777;
+      alert("🎉 Джекпот! Вы выигрываете 777 777 монет!");
     }
 
     updateMoneyDisplay();
