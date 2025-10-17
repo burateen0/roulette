@@ -36,12 +36,12 @@ function resetAnimation(column) {
 let isStarted = false;
 
 function start() {
-  if (isStarted) return; // Блокируем повторный запуск
-  isStarted = true; // Устанавливаем флаг, что игра началась
+  if (isStarted) return;
+  isStarted = true;
 
   if (money < 10) {
     alert("Недостаточно средств чтобы играть!");
-    isStarted = false; // Разблокируем для новой попытки
+    isStarted = false;
     return;
   }
 
@@ -49,6 +49,9 @@ function start() {
   updateMoneyDisplay();
 
   const columns = ['col1', 'col2', 'col3'];
+  const isJackpot = Math.random() < 0.11;
+  let jackpotNumber = Math.floor(Math.random() * 10);
+
   columns.forEach((column) => {
     calcColumn(column);
     resetAnimation(column);
@@ -64,24 +67,35 @@ function start() {
     });
   }, 50);
 
-  const index = -Math.floor((move + (elm('.scopeHidden').offsetWidth / 2) / -150) / 150) + 1;
-  const results = columns.map((column) => parseInt(elms(`.${column} > li`)[index].textContent));
-
   setTimeout(() => {
-    if (results[0] === results[1] && results[1] === results[2]) {
-      setTimeout(() => {
-        money += 10000; 
-        alert("🎉 Джекпот! Вы выигрываете 10 000 монет!");
-        updateMoneyDisplay(); 
-        isStarted = false; 
-      }, 1000);
-    } else {
-      updateMoneyDisplay();
-      isStarted = false; // если джекпота нет
+    const index = -Math.floor((move + (elm('.scopeHidden').offsetWidth / 2) / -150) / 150) + 1;
+
+    if (isJackpot) {
+      // Вставляем одинаковое число в центр
+      columns.forEach((column) => {
+        elms(`.${column} > li`)[index].textContent = jackpotNumber;
+      });
     }
-    console.log(results);
-  }, 900); // Таймер для завершения основной анимации
+
+    const results = columns.map((column) => parseInt(elms(`.${column} > li`)[index].textContent));
+
+    setTimeout(() => {
+      if (results[0] === results[1] && results[1] === results[2]) {
+        setTimeout(() => {
+          money += 10000;
+          alert("🎉 Джекпот! Вы выигрываете 10 000 монет!");
+          updateMoneyDisplay();
+          isStarted = false;
+        }, 100);
+      } else {
+        updateMoneyDisplay();
+        isStarted = false;
+      }
+      console.log(results);
+    }, 999); 
+  }, 600); 
 }
+
 
 
   // columns.forEach((column, i) => {
